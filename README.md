@@ -3,6 +3,10 @@ Specialised security analysis tool for macOS software packages: DMG, PKG, and AP
 
 _Inspired on the Norwegian verb "å mase" (to nag) because it is annoying having to write a bunch of commands to statically analyse a file, so instead now it is an actual python code!_
 
+The [What's Your Sign](https://objective-see.org/products/whatsyoursign.html) by Objective See is a way better tool! My tool MAS is just a humble POC.
+PS: I'm struggling with checking if a bundle is sandboxed or not :´)
+
+
 ## Supported File Types
 
 - **`.dmg`** Disk images (installers)
@@ -51,26 +55,27 @@ python3 mas.py --entitlements App.app
 python3 mas.py ~/Downloads/*.dmg
 ```
 
-## Output Example
-(I need to add a pic here)
-
 ## Command-Line Options
 
-```
-usage: mas.py [-h] [-v] [--entitlements] [--format {text,json,csv,html}]
-              [--no-color] [--version] FILE [FILE ...]
+<img width="560" height="416" alt="mas-help" src="https://github.com/user-attachments/assets/64def68d-5833-465c-880b-f235018917ac" />
 
-positional arguments:
-  FILE                  DMG, PKG, or APP file(s) to analyze
+## Troubleshooting
 
-options:
-  -h, --help            Show help message
-  -v, --verbose         Show hashes and timestamps
-  --entitlements        Extract and show app entitlements/permissions
-  --format FORMAT       Output format: text, json, csv, html (default: text)
-  --no-color            Disable colored output
-  --version             Show version number
+- Under entitlements, if you see: `Details: xcode-select: error: tool 'stapler' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance`
+then you will need to install Command Line Tools if you haven't already and enable them:
+
+```bash
+xcode-select --install
+sudo xcode-select --switch /Library/Developer/CommandLineTools
 ```
+
+If the error persists, change the path of your installed Xcode:
+```bash
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+```
+
+
+
 ---
 
 🔐 Stay safe! Always verify your downloads.
